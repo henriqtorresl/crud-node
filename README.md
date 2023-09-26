@@ -4,3 +4,5 @@
     - Framework: `Express.js`
     - Linguagem: `Typescript`
     - Banco de dados: `SQLite`
+- Para rodar a API:
+    - `npm start`
