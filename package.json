@@ -4,8 +4,12 @@
   "description": "",
   "main": "src/app.ts",
   "scripts": {
+    "start": "node src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Henrique Torres",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
