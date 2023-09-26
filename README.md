@@ -1,2 +1,6 @@
 # crud-node
-- Repositório criado com o intuito de criar uma API Restful, mais especificamente, um CRUD usando o framework `Express.js` do `Node.js`
+- Repositório criado com fins de estudo, para praticar a criação de uma API Restful, mais especificamente, de um CRUD em `Node.js`.
+- Tecnologias usadas:
+    - Framework: `Express.js`
+    - Linguagem: `Typescript`
+    - Banco de dados: `SQLite`
