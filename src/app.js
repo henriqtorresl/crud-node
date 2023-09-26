@@ -1,10 +1,10 @@
-import { openDb } from './configDB.js';
 import express from 'express';
+import { createTable } from './controller/pessoa.js'
 
 const app = express();
 app.use(express.json());        // configuração para que o app reconheça JSON nas requisições..
 
-openDb();
+createTable();      // criando a tabela de pessoas
 
 app.get('/', (req, res) => {
     return res.json({'message': 'Olá mundo!'})
