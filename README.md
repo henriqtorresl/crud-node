@@ -5,4 +5,5 @@
     - Linguagem: `Typescript`
     - Banco de dados: `SQLite`
 - Para rodar a API:
-    - `npm start`
+    - Configurar o SQLite
+    - `npm start` para rodar o projeto
