@@ -1,7 +1,10 @@
-const express = require('express');
-const app = express();
+import { openDb } from './configDB.js';
+import express from 'express';
 
+const app = express();
 app.use(express.json());        // configuração para que o app reconheça JSON nas requisições..
+
+openDb();
 
 app.get('/', (req, res) => {
     return res.json({'message': 'Olá mundo!'})
