@@ -1,5 +1,5 @@
 import express from 'express';
-import { createTable, insertPessoa, updatePessoa, selectPessoa, deletePessoa } from './controller/pessoa.js'
+import { createTable, selectPessoa, selectOnePessoa, insertPessoa, updatePessoa, deletePessoa } from './controller/pessoa.js'
 
 const app = express();
 app.use(express.json());        // configuração para que o app reconheça JSON nas requisições..
@@ -15,6 +15,13 @@ app.get('/pessoa', async (req, res) => {
 
     return res.json(pessoas);
 })
+
+app.get('/pessoa/:id', async (req, res) => {
+    let { id } = req.params;        // pego o valor que está no objeto id do meu 'req.params'
+    let pessoa = await selectOnePessoa(id);
+
+    return res.json(pessoa);
+});
 
 app.post('/pessoa', (req, res) => {
     console.log(req.body);

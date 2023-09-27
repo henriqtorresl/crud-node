@@ -15,6 +15,16 @@ export async function selectPessoa() {
     });
 }
 
+export async function selectOnePessoa(id) {
+    return openDb().then((db) => {
+        return db.all('SELECT * FROM Pessoa WHERE id = ?', [id])
+        .then((pessoa) => {
+            console.log(pessoa);
+            return pessoa;
+        })
+    });
+}
+
 export async function insertPessoa(pessoa) {
     openDb().then((db) => {
         db.run('INSERT INTO Pessoa (nome, idade) VALUES (?,?)', [pessoa.nome, pessoa.idade]);
