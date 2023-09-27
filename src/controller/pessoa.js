@@ -8,9 +8,8 @@ export async function createTable() {
 
 export async function selectPessoa() {
     return openDb().then((db) => {
-        db.all('SELECT * FROM Pessoa')
+        return db.all('SELECT * FROM Pessoa')
         .then((pessoas) => {
-            console.log(pessoas)
             return pessoas;
         });
     });
