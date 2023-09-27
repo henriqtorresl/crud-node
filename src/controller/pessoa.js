@@ -6,38 +6,58 @@ export async function createTable() {
     });
 }
 
-export async function selectPessoa() {
-    return openDb().then((db) => {
-        return db.all('SELECT * FROM Pessoa')
+export async function selectPessoa(req, res) {
+    openDb().then((db) => {
+        db.all('SELECT * FROM Pessoa')
         .then((pessoas) => {
-            return pessoas;
+            return res.json(pessoas);
         });
     });
 }
 
-export async function selectOnePessoa(id) {
-    return openDb().then((db) => {
-        return db.get('SELECT * FROM Pessoa WHERE id = ?', [id])
+export async function selectOnePessoa(req, res) {
+    openDb().then((db) => {
+        const { id } = req.params;      // pegando apenas o valor do objeto id.. aqui estou desestruturando o objeto que vem de 'req.params'
+        db.get('SELECT * FROM Pessoa WHERE id = ?', [id])
         .then((pessoa) => {
-            return pessoa;
+            return res.json(pessoa);
+        });
+    });
+}
+
+export async function insertPessoa(req, res) {
+    openDb().then((db) => {
+        const pessoa = req.body;
+        db.run('INSERT INTO Pessoa (nome, idade) VALUES (?,?)', [pessoa.nome, pessoa.idade]);
+        
+        return res.json(pessoa);
+    });
+}
+
+export async function updatePessoa(req, res) {
+    openDb().then((db) => {
+        console.log(req.body);      // pessoa
+        console.log(req.params);    // id
+
+        const pessoa = req.body;
+        const { id } = req.params;
+        db.run('UPDATE Pessoa SET nome=?, idade=? WHERE id=?', [pessoa.nome, pessoa.idade, id]);
+
+        return res.json({
+            'statusCode': 200
         })
     });
 }
 
-export async function insertPessoa(pessoa) {
+export async function deletePessoa(req, res) {
     openDb().then((db) => {
-        db.run('INSERT INTO Pessoa (nome, idade) VALUES (?,?)', [pessoa.nome, pessoa.idade]);
-    });
-}
+        console.log(req.params);
 
-export async function updatePessoa(pessoa, id) {
-    openDb().then((db) => {
-        db.run('UPDATE Pessoa SET nome=?, idade=? WHERE id=?', [pessoa.nome, pessoa.idade, id]);
-    });
-}
-
-export async function deletePessoa(id) {
-    openDb().then((db) => {
+        const { id } = req.params;
         db.run('DELETE FROM Pessoa WHERE id=?', [id]);
+
+        return res.json({
+            'statusCode': 200
+        });
     });
 }
